@@ -1,33 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import { Home } from "./home/Index"
+import { AboutUs } from "./about/Index"
+import { Admission } from "./admission/Index"
+import { Curriculum } from "./curriculum/Index"
+import { NewsEvents } from "./news-events/Index"
+import { Gallery } from "./gallery/Index"
+import { Contact } from "./contact-us/Index"
+import { Root } from "./root/Index"
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const routes = createBrowserRouter([
+    {
+      path: "/",
+      element: <Root />,
+      children: [
+        {
+          path: "/",
+          element: <Home />
+        }, {
+          path: "/about",
+          element: <AboutUs />
+        }, {
+          path: "/admission",
+          element: <Admission />
+        }, {
+          path: "/curriculum",
+          element: <Curriculum />
+        }, {
+          path: "/news",
+          element: <NewsEvents />
+        }, {
+          path: "/gallery",
+          element: <Gallery />
+        }, {
+          path: "/contact",
+          element: <Contact />
+        },
+      ]
+    }
+  ])
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <main>
+        <RouterProvider router={routes} />
+      </main>
     </>
   )
 }
